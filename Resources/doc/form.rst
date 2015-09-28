@@ -246,13 +246,13 @@ and its template:
 Finally, create the controller which handles the form submission.  This performs
 the validation and saves the data into MongoDB::
 
-    public function createAction()
+    public function createAction(Request $request)
     {
         $dm = $this->get('doctrine_mongodb')->getManager();
 
         $form = $this->createForm(new RegistrationType(), new Registration());
 
-        $form->bindRequest($this->getRequest());
+        $form->handleRequest($request);
 
         if ($form->isValid()) {
             $registration = $form->getData();
